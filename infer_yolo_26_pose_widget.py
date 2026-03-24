@@ -1,9 +1,11 @@
+from PyQt6.QtWidgets import *
+
+from torch.cuda import is_available
+
 from ikomia import core, dataprocess
 from ikomia.utils import pyqtutils, qtconversion
-from infer_yolo_26_pose.infer_yolo_26_pose_process import InferYolo26PoseParam
 
-from PyQt5.QtWidgets import *
-from torch.cuda import is_available
+from infer_yolo_26_pose.infer_yolo_26_pose_process import InferYolo26PoseParam
 
 
 class InferYolo26PoseWidget(core.CWorkflowTaskWidget):

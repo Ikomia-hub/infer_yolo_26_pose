@@ -71,15 +71,12 @@ class InferYolo26Pose(dataprocess.CKeypointDetectionTask):
 
     def _load_model(self):
         param = self.get_param_object()
-        self.device = torch.device(
-            "cuda") if param.cuda and torch.cuda.is_available() else torch.device("cpu")
+        self.device = torch.device("cuda") if param.cuda and torch.cuda.is_available() else torch.device("cpu")
         self.half = True if param.cuda and torch.cuda.is_available() else False
 
-        model_folder = os.path.join(os.path.dirname(
-            os.path.realpath(__file__)), "weights")
+        model_folder = os.path.join(os.path.dirname(os.path.realpath(__file__)), "weights")
         os.makedirs(model_folder, exist_ok=True)
-        model_weights = os.path.join(
-            str(model_folder), f"{param.model_name}.pt")
+        model_weights = os.path.join(str(model_folder), f"{param.model_name}.pt")
 
         if not os.path.isfile(model_weights):
             url = f"https://github.com/{self.repo}/releases/download/{self.version}/{param.model_name}.pt"
@@ -140,8 +137,7 @@ class InferYolo26Pose(dataprocess.CKeypointDetectionTask):
             kept_kp_id = []
 
             for link in self.get_keypoint_links():
-                kp1, kp2 = kpts_data[link.start_point_index -
-                                     1], kpts_data[link.end_point_index - 1]
+                kp1, kp2 = kpts_data[link.start_point_index -1], kpts_data[link.end_point_index - 1]
                 x1, y1 = kp1
                 x2, y2 = kp2
 
@@ -178,7 +174,7 @@ class InferYolo26PoseFactory(dataprocess.CTaskFactory):
         self.info.short_description = "Inference with YOLO26 pose estimation models"
         self.info.path = "Plugins/Python/Pose"
         self.info.version = "1.0.0"
-        self.info.min_ikomia_version = "0.15.0"
+        self.info.min_ikomia_version = "0.16.0"
         self.info.icon_path = "images/icon.png"
         self.info.authors = "Jocher, G., Chaurasia, A., & Qiu, J"
         self.info.article = "YOLO by Ultralytics"
